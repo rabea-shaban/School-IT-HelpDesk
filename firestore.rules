@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Tickets collection
+    // Anyone in the school can create a ticket without auth
+    // Only authenticated IT Admins can view all tickets, update statuses, or delete tickets
+    match /tickets/{ticketId} {
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.problemDescription is string
+                    && request.resource.data.requestedAction is string;
+      allow read, update, delete: if request.auth != null;
+    }
+    
+    // Devices directory
+    match /devices/{deviceId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    // Labs directory
+    match /labs/{labId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Default deny for everything else
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
