@@ -61,16 +61,13 @@ export const Navbar: React.FC = () => {
   const userInitials = (user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT').toUpperCase();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-xs select-none">
-      {/* Top Brand Accent Line */}
-      <div className="h-0.5 sm:h-1 w-full bg-gradient-to-r from-school-600 via-orange-500 to-indigo-600" />
-
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-4 sm:gap-6">
+    <header className="sticky top-0 z-50 pt-3 sm:pt-4 pb-1 px-4 sm:px-6 lg:px-8 select-none pointer-events-none">
+      <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-lg shadow-slate-900/5 rounded-2xl sm:rounded-3xl px-3.5 sm:px-5 py-2 sm:py-2.5 pointer-events-auto flex items-center justify-between gap-3 sm:gap-4 transition-all">
           
           {/* SECTION 1: Brand & School Logo */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-2xl border border-slate-700/80 shadow-sm shadow-slate-950/20 flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
+            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-700/80 shadow-xs flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
               <img
                 src="/logochool.svg"
                 alt="B.TECH"
@@ -80,7 +77,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
                 alt="وزارة التربية والتعليم"
-                className="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain drop-shadow-sm"
+                className="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain drop-shadow-xs"
               />
             </div>
 
@@ -89,7 +86,7 @@ export const Navbar: React.FC = () => {
                 <span className="font-black text-xs sm:text-sm lg:text-base tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap">
                   {t('nav.title')}
                 </span>
-                <span className="hidden 2xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-black uppercase tracking-wider shadow-xs whitespace-nowrap">
+                <span className="hidden 2xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-black uppercase tracking-wider shadow-2xs whitespace-nowrap">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   {t('nav.internalBadge')}
                 </span>
@@ -154,7 +151,7 @@ export const Navbar: React.FC = () => {
           )}
 
           {/* SECTION 3: Action Hub */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Primary Action Button: Submit Ticket */}
             <Link
               to="/"
@@ -267,96 +264,96 @@ export const Navbar: React.FC = () => {
           </div>
 
         </div>
-      </div>
 
-      {/* Mobile & Tablet Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-200 bg-white/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-lg">
-          <Link
-            to="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-xl bg-school-50 text-school-700 font-bold text-sm border border-school-200/70"
-          >
-            <Plus className="w-5 h-5 text-school-600" />
-            <span>{t('nav.submitRequest')}</span>
-          </Link>
+        {/* Mobile & Tablet Drawer Menu */}
+        {mobileMenuOpen && (
+          <div className="pointer-events-auto mt-2 bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl shadow-xl p-4 space-y-3 animate-fadeIn">
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 p-3 rounded-xl bg-school-50 text-school-700 font-bold text-sm border border-school-200/70"
+            >
+              <Plus className="w-5 h-5 text-school-600" />
+              <span>{t('nav.submitRequest')}</span>
+            </Link>
 
-          {isAdmin ? (
-            <>
-              {/* User Profile Card in mobile drawer */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
-                    {userInitials}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="font-extrabold text-xs text-slate-900 truncate">
-                      {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+            {isAdmin ? (
+              <>
+                {/* User Profile Card in mobile drawer */}
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
+                      {userInitials}
                     </div>
-                    <div className="text-[11px] text-slate-500 truncate font-medium">
-                      {user?.email || t('nav.authenticatedAdmin')}
+                    <div className="min-w-0">
+                      <div className="font-extrabold text-xs text-slate-900 truncate">
+                        {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                      </div>
+                      <div className="text-[11px] text-slate-500 truncate font-medium">
+                        {user?.email || t('nav.authenticatedAdmin')}
+                      </div>
                     </div>
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0"
+                  >
+                    <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
+                    <span>{t('nav.logout')}</span>
+                  </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0"
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
                 >
-                  <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
-                  <span>{t('nav.logout')}</span>
-                </button>
+                  <LayoutDashboard className="w-5 h-5 text-school-600" />
+                  <span>{t('nav.dashboard')}</span>
+                </Link>
+                <Link
+                  to="/tickets"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                >
+                  <TicketIcon className="w-5 h-5 text-school-600" />
+                  <span>{t('nav.tickets')}</span>
+                </Link>
+                <Link
+                  to="/labs"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                >
+                  <Layers className="w-5 h-5 text-school-600" />
+                  <span>{t('nav.labs')}</span>
+                </Link>
+                <Link
+                  to="/devices"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                >
+                  <Server className="w-5 h-5 text-school-600" />
+                  <span>{t('nav.devices')}</span>
+                </Link>
+              </>
+            ) : (
+              <div className="pt-2 border-t border-slate-100">
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <button
+                    type="button"
+                    className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    <span>{t('nav.login')}</span>
+                  </button>
+                </Link>
               </div>
-
-              <Link
-                to="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-              >
-                <LayoutDashboard className="w-5 h-5 text-school-600" />
-                <span>{t('nav.dashboard')}</span>
-              </Link>
-              <Link
-                to="/tickets"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-              >
-                <TicketIcon className="w-5 h-5 text-school-600" />
-                <span>{t('nav.tickets')}</span>
-              </Link>
-              <Link
-                to="/labs"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-              >
-                <Layers className="w-5 h-5 text-school-600" />
-                <span>{t('nav.labs')}</span>
-              </Link>
-              <Link
-                to="/devices"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-              >
-                <Server className="w-5 h-5 text-school-600" />
-                <span>{t('nav.devices')}</span>
-              </Link>
-            </>
-          ) : (
-            <div className="pt-2 border-t border-slate-100">
-              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                <button
-                  type="button"
-                  className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span>{t('nav.login')}</span>
-                </button>
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
     </header>
   );
 };
