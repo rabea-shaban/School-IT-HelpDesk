@@ -147,8 +147,8 @@ export const Navbar: React.FC = () => {
             </nav>
           </div>
 
-          {/* End Group: Language Toggle & User Profile Capsule */}
-          <div className="hidden sm:flex items-center gap-2.5 sm:gap-3 shrink-0">
+          {/* Desktop Right Actions (Visible ONLY on xl screens where full desktop bar is shown) */}
+          <div className="hidden xl:flex items-center gap-3 shrink-0">
             <LanguageToggle variant="pill" />
 
             {isAdmin ? (
@@ -180,7 +180,7 @@ export const Navbar: React.FC = () => {
                   className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-all active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
                 >
                   <LogOut className="w-3.5 h-3.5 rtl:rotate-180 shrink-0" />
-                  <span className="hidden sm:inline">{t('nav.logout')}</span>
+                  <span>{t('nav.logout')}</span>
                 </button>
               </div>
             ) : (
@@ -194,14 +194,24 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Mobile & Tablet Menu Button & Language Switch */}
+          {/* Mobile & Tablet Top Bar Items (Visible on screens < xl) */}
           <div className="flex xl:hidden items-center gap-2 shrink-0">
-            <div className="sm:hidden">
-              <LanguageToggle variant="compact" />
-            </div>
+            <LanguageToggle variant="compact" />
+
+            {isAdmin && (
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="w-8 h-8 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-xs shrink-0 active:scale-95 transition-transform cursor-pointer"
+                title={user?.displayName || 'حساب المسؤول'}
+              >
+                {(user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT').toUpperCase()}
+              </button>
+            )}
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200/80 bg-white shadow-2xs"
+              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200/80 bg-white shadow-2xs cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
