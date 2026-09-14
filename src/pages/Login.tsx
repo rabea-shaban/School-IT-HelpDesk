@@ -57,18 +57,18 @@ export const Login: React.FC = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link to="/" className="inline-flex flex-col items-center gap-3 group">
           <div className="flex items-center justify-center gap-3">
-            <div className="bg-white p-1.5 rounded-2xl shadow-md">
+            <div className="bg-[#0d2744] px-4 py-2.5 rounded-2xl shadow-md border border-slate-700/60 flex items-center justify-center">
+              <img
+                src="/logochool.svg"
+                alt="شعار مدرسة بي تك"
+                className="h-6 w-auto object-contain"
+              />
+            </div>
+            <div className="bg-white p-1.5 rounded-2xl shadow-md border border-slate-200">
               <img
                 src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
                 alt="وزارة التربية والتعليم"
-                className="w-12 h-12 object-contain rounded-full"
-              />
-            </div>
-            <div className="bg-white p-1.5 rounded-2xl shadow-md">
-              <img
-                src="/logo_AT.jpg"
-                alt="التكنولوجيا التطبيقية"
-                className="h-12 w-auto object-contain rounded-xl"
+                className="w-11 h-11 object-contain rounded-full"
               />
             </div>
           </div>

@@ -42,16 +42,18 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3.5 group">
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="bg-[#0d2744] px-2.5 py-1.5 rounded-xl border border-slate-700/60 shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform h-9 sm:h-10">
+                <img
+                  src="/logochool.svg"
+                  alt="شعار مدرسة بي تك"
+                  className="h-4 sm:h-5 w-auto object-contain"
+                />
+              </div>
               <img
                 src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
                 alt="وزارة التربية والتعليم"
                 className="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full bg-white shadow-xs p-0.5 border border-slate-200/80 group-hover:scale-105 transition-transform"
-              />
-              <img
-                src="/logo_AT.jpg"
-                alt="التكنولوجيا التطبيقية"
-                className="h-7 sm:h-9 w-auto object-contain rounded-lg bg-white shadow-xs p-0.5 border border-slate-200/80 group-hover:scale-105 transition-transform"
               />
             </div>
             <div>
