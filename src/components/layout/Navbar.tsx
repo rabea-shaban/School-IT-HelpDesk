@@ -41,113 +41,110 @@ export const Navbar: React.FC = () => {
       {/* Top Brand Accent Line */}
       <div className="h-0.5 sm:h-1 w-full bg-gradient-to-r from-school-600 via-orange-500 to-indigo-600" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-4">
-          {/* Start Group: Logo & Desktop Navigation */}
-          <div className="flex items-center gap-3 lg:gap-6 shrink-0">
-            {/* Logo & Brand Unit */}
-            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group select-none shrink-0">
-              {/* Unified High-Tech Brand Capsule */}
-              <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-2xl border border-slate-700/80 shadow-sm shadow-slate-950/20 flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
-                <img
-                  src="/logochool.svg"
-                  alt="B.TECH"
-                  className="h-4 sm:h-4.5 w-auto object-contain"
-                />
-                <div className="w-px h-3.5 sm:h-4 bg-white/20" />
-                <img
-                  src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
-                  alt="وزارة التربية والتعليم"
-                  className="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain drop-shadow-sm"
-                />
-              </div>
+          {/* 1. Brand Logo & Title (Start side) */}
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group select-none shrink-0">
+            {/* Unified High-Tech Brand Capsule */}
+            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-2xl border border-slate-700/80 shadow-sm shadow-slate-950/20 flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
+              <img
+                src="/logochool.svg"
+                alt="B.TECH"
+                className="h-4 sm:h-4.5 w-auto object-contain"
+              />
+              <div className="w-px h-3.5 sm:h-4 bg-white/20" />
+              <img
+                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                alt="وزارة التربية والتعليم"
+                className="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain drop-shadow-sm"
+              />
+            </div>
 
-              {/* School Title & Status Capsule */}
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-black text-xs sm:text-sm lg:text-base tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap">
-                    {t('nav.title')}
-                  </span>
-                  <span className="hidden 2xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-black uppercase tracking-wider shadow-xs whitespace-nowrap">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    {t('nav.internalBadge')}
-                  </span>
-                </div>
-                <p className="text-[10px] sm:text-[11px] text-slate-500 font-bold hidden md:block truncate">
-                  {t('nav.subtitle')}
-                </p>
+            {/* School Title & Status Capsule */}
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="font-black text-xs sm:text-sm lg:text-base tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap">
+                  {t('nav.title')}
+                </span>
+                <span className="hidden 2xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-black uppercase tracking-wider shadow-xs whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {t('nav.internalBadge')}
+                </span>
               </div>
+              <p className="text-[10px] sm:text-[11px] text-slate-500 font-bold hidden md:block truncate">
+                {t('nav.subtitle')}
+              </p>
+            </div>
+          </Link>
+
+          {/* 2. Desktop Navigation (Centered in the Middle) */}
+          <nav className="hidden xl:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm mx-auto shrink-0">
+            <Link
+              to="/"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                isActive('/') && location.pathname === '/'
+                  ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+              }`}
+            >
+              <PlusCircle className="w-3.5 h-3.5 text-school-600 shrink-0" />
+              <span>{t('nav.submitRequest')}</span>
             </Link>
 
-            {/* Desktop Navigation (Visible on xl screens and above) */}
-            <nav className="hidden xl:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shrink-0">
-              <Link
-                to="/"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                  isActive('/') && location.pathname === '/'
-                    ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                }`}
-              >
-                <PlusCircle className="w-3.5 h-3.5 text-school-600 shrink-0" />
-                <span>{t('nav.submitRequest')}</span>
-              </Link>
+            {isAdmin && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/dashboard')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <LayoutDashboard className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.dashboard')}</span>
+                </Link>
 
-              {isAdmin && (
-                <>
-                  <Link
-                    to="/dashboard"
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                      isActive('/dashboard')
-                        ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                    }`}
-                  >
-                    <LayoutDashboard className="w-3.5 h-3.5 shrink-0" />
-                    <span>{t('nav.dashboard')}</span>
-                  </Link>
+                <Link
+                  to="/tickets"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/tickets')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <TicketIcon className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.tickets')}</span>
+                </Link>
 
-                  <Link
-                    to="/tickets"
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                      isActive('/tickets')
-                        ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                    }`}
-                  >
-                    <TicketIcon className="w-3.5 h-3.5 shrink-0" />
-                    <span>{t('nav.tickets')}</span>
-                  </Link>
+                <Link
+                  to="/labs"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/labs')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <Layers className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.labs')}</span>
+                </Link>
 
-                  <Link
-                    to="/labs"
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                      isActive('/labs')
-                        ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                    }`}
-                  >
-                    <Layers className="w-3.5 h-3.5 shrink-0" />
-                    <span>{t('nav.labs')}</span>
-                  </Link>
+                <Link
+                  to="/devices"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/devices')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <Server className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.devices')}</span>
+                </Link>
+              </>
+            )}
+          </nav>
 
-                  <Link
-                    to="/devices"
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                      isActive('/devices')
-                        ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                    }`}
-                  >
-                    <Server className="w-3.5 h-3.5 shrink-0" />
-                    <span>{t('nav.devices')}</span>
-                  </Link>
-                </>
-              )}
-            </nav>
-          </div>
-
-          {/* Desktop Right Actions (Visible ONLY on xl screens where full desktop bar is shown) */}
+          {/* 3. Action Tools & User Profile Capsule (End side) */}
           <div className="hidden xl:flex items-center gap-3 shrink-0">
             <LanguageToggle variant="pill" />
 
