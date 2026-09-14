@@ -48,21 +48,14 @@ export const SubmitRequest: React.FC = () => {
 
       {/* Hero Header */}
       <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-850 text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-5">
-          {/* Official Logos Header Banner */}
-          <div className="flex items-center justify-center gap-3 sm:gap-6 pb-1">
-            <div className="bg-white/95 p-1.5 sm:p-2 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
+          {/* Official B.TECH School Banner */}
+          <div className="flex items-center justify-center pb-1">
+            <div className="max-w-xl w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-white/20 bg-[#0d2744] backdrop-blur-md p-1 sm:p-1.5 transition-transform hover:scale-[1.01]">
               <img
-                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
-                alt="جمهورية مصر العربية - وزارة التربية والتعليم والتعليم الفني"
-                className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-full"
-              />
-            </div>
-            <div className="bg-white/95 p-1.5 sm:p-2 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm">
-              <img
-                src="/logo_AT.jpg"
-                alt="مدارس التكنولوجيا التطبيقية - Applied Technology"
-                className="h-12 sm:h-16 w-auto object-contain rounded-xl"
+                src="/btech-school-banner.jpg"
+                alt="مدرسة بي تك للتكنولوجيا التطبيقية - وزارة التربية والتعليم والتعليم الفني"
+                className="w-full h-auto object-cover rounded-xl sm:rounded-2xl"
               />
             </div>
           </div>
