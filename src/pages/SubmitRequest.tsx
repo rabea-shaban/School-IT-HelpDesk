@@ -46,49 +46,59 @@ export const SubmitRequest: React.FC = () => {
     <div className="min-h-screen bg-slate-50 flex flex-col selection:bg-school-500 selection:text-white">
       <Navbar />
 
-      {/* Hero Header */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-850 text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
-          {/* Official B.TECH School Banner */}
-          <div className="flex items-center justify-center pb-1">
-            <div className="max-w-xl w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black/40 border border-white/20 bg-[#0d2744] backdrop-blur-md p-1 sm:p-1.5 transition-transform hover:scale-[1.01]">
-              <img
-                src="/btech-school-banner.jpg"
-                alt="مدرسة بي تك للتكنولوجيا التطبيقية - وزارة التربية والتعليم والتعليم الفني"
-                className="w-full h-auto object-cover rounded-xl sm:rounded-2xl"
-              />
+      {/* Modern Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#071526] via-[#0a223c] to-[#0f2d4e] text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8 border-b border-slate-800/80 shadow-2xl">
+        {/* Ambient Glow Lights */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-r from-school-500/20 via-orange-500/15 to-indigo-500/20 blur-[90px] pointer-events-none" />
+        <div className="absolute top-1/2 -right-20 w-80 h-80 bg-school-600/10 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-1/2 -left-20 w-80 h-80 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-5 sm:space-y-6">
+          {/* Official B.TECH School Banner Showcase */}
+          <div className="flex items-center justify-center">
+            <div className="relative group max-w-xl w-full">
+              {/* Neon Glow behind the banner */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-school-500 via-orange-500/50 to-indigo-600 rounded-3xl blur-md opacity-35 group-hover:opacity-60 transition duration-500" />
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/25 bg-[#091f38] shadow-2xl p-1 sm:p-1.5 backdrop-blur-xl">
+                <img
+                  src="/btech-school-banner.jpg"
+                  alt="مدرسة بي تك للتكنولوجيا التطبيقية - وزارة التربية والتعليم والتعليم الفني"
+                  className="w-full h-auto object-cover rounded-xl sm:rounded-2xl"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-school-500/15 border border-school-400/30 text-school-300 text-xs font-bold tracking-wide uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-school-400" />
-            {t('submit.heroBadge')}
+          {/* Badge & Headlines */}
+          <div className="space-y-2.5 pt-1">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-school-200 text-xs font-black tracking-wide uppercase backdrop-blur-md shadow-inner">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
+              <span>{t('submit.heroBadge')}</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+              {t('submit.heroTitle')}
+            </h1>
+
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+              {t('submit.heroSubtitle', { labs: TOTAL_LABS_COUNT, devices: TOTAL_SCHOOL_DEVICES_COUNT })}
+            </p>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-            {t('submit.heroTitle')}
-          </h1>
-
-          <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            {t('submit.heroSubtitle', { labs: TOTAL_LABS_COUNT, devices: TOTAL_SCHOOL_DEVICES_COUNT })}
-          </p>
-
-          {/* Feature Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 text-xs font-semibold text-slate-300">
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-              {t('submit.badgeNoAccount')}
-            </span>
-            <span className="hidden sm:inline text-slate-600">&bull;</span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
-              {t('submit.badgeDirectDispatch')}
-            </span>
-            <span className="hidden sm:inline text-slate-600">&bull;</span>
-            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
-              <ShieldCheck className="w-3.5 h-3.5 text-school-400" />
-              {t('submit.badgeTrackingId')}
-            </span>
+          {/* Quick Metrics Bar */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-2 text-xs font-bold">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-slate-200 backdrop-blur-sm shadow-xs">
+              <CheckCircle className="w-4 h-4 text-emerald-400" />
+              <span>{t('submit.badgeNoAccount')}</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-slate-200 backdrop-blur-sm shadow-xs">
+              <Zap className="w-4 h-4 text-amber-400" />
+              <span>{t('submit.badgeDirectDispatch')}</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-slate-200 backdrop-blur-sm shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-school-300" />
+              <span>{t('submit.badgeTrackingId')}</span>
+            </div>
           </div>
         </div>
       </section>
