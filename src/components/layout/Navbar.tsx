@@ -61,9 +61,12 @@ export const Navbar: React.FC = () => {
   const userInitials = (user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT').toUpperCase();
 
   return (
-    <header className="sticky top-0 z-50 pt-3 sm:pt-4 pb-1 px-4 sm:px-6 lg:px-8 select-none pointer-events-none">
-      <div className="w-full max-w-7xl mx-auto">
-        <div className="w-full bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-lg shadow-slate-900/5 rounded-2xl sm:rounded-3xl px-3.5 sm:px-5 py-2 sm:py-2.5 pointer-events-auto flex items-center justify-between gap-3 sm:gap-4 transition-all">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs select-none">
+      {/* Top Brand Accent Line */}
+      <div className="h-0.5 sm:h-1 w-full bg-gradient-to-r from-school-600 via-orange-500 to-indigo-600" />
+
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-4">
           
           {/* SECTION 1: Brand & School Logo */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
@@ -102,7 +105,7 @@ export const Navbar: React.FC = () => {
             <nav className="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shadow-2xs shrink-0">
               <Link
                 to="/dashboard"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   isActive('/dashboard')
                     ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
@@ -114,7 +117,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to="/tickets"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   isActive('/tickets')
                     ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
@@ -126,7 +129,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to="/labs"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   isActive('/labs')
                     ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
@@ -138,7 +141,7 @@ export const Navbar: React.FC = () => {
 
               <Link
                 to="/devices"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
                   isActive('/devices')
                     ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
@@ -151,20 +154,7 @@ export const Navbar: React.FC = () => {
           )}
 
           {/* SECTION 3: Action Hub */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            {/* Primary Action Button: Submit Ticket */}
-            <Link
-              to="/"
-              className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap shadow-xs ${
-                isActive('/') && location.pathname === '/'
-                  ? 'bg-school-50 text-school-700 border border-school-200/80'
-                  : 'bg-school-600 hover:bg-school-700 text-white shadow-school-600/20 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0'
-              }`}
-            >
-              <Plus className="w-4 h-4 shrink-0" />
-              <span>{t('nav.submitRequest')}</span>
-            </Link>
-
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Language Switcher */}
             <LanguageToggle variant="pill" className="hidden sm:inline-flex" />
             <LanguageToggle variant="compact" className="sm:hidden" />
@@ -175,12 +165,20 @@ export const Navbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-1.5 p-1 sm:p-1.5 rounded-2xl hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all cursor-pointer group active:scale-95"
+                  className="flex items-center gap-2 p-1 sm:p-1.5 rounded-2xl hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300 transition-all cursor-pointer group active:scale-95 bg-slate-50/80 shadow-2xs"
                   aria-expanded={userDropdownOpen}
                   aria-label="User menu"
                 >
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
+                  <div className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
                     {userInitials}
+                  </div>
+                  <div className="hidden md:block text-right rtl:text-right ltr:text-left min-w-0 pr-1 pl-1">
+                    <p className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
+                      {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                    </p>
+                    <p className="text-[10px] text-slate-500 font-medium leading-none">
+                      {t('nav.itAdmin')}
+                    </p>
                   </div>
                   <ChevronDown className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -264,96 +262,87 @@ export const Navbar: React.FC = () => {
           </div>
 
         </div>
+      </div>
 
-        {/* Mobile & Tablet Drawer Menu */}
-        {mobileMenuOpen && (
-          <div className="pointer-events-auto mt-2 bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl shadow-xl p-4 space-y-3 animate-fadeIn">
-            <Link
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-school-50 text-school-700 font-bold text-sm border border-school-200/70"
-            >
-              <Plus className="w-5 h-5 text-school-600" />
-              <span>{t('nav.submitRequest')}</span>
-            </Link>
-
-            {isAdmin ? (
-              <>
-                {/* User Profile Card in mobile drawer */}
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
-                      {userInitials}
+      {/* Mobile & Tablet Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-lg">
+          {isAdmin ? (
+            <>
+              {/* User Profile Card in mobile drawer */}
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
+                    {userInitials}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-extrabold text-xs text-slate-900 truncate">
+                      {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
                     </div>
-                    <div className="min-w-0">
-                      <div className="font-extrabold text-xs text-slate-900 truncate">
-                        {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
-                      </div>
-                      <div className="text-[11px] text-slate-500 truncate font-medium">
-                        {user?.email || t('nav.authenticatedAdmin')}
-                      </div>
+                    <div className="text-[11px] text-slate-500 truncate font-medium">
+                      {user?.email || t('nav.authenticatedAdmin')}
                     </div>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0"
-                  >
-                    <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
-                    <span>{t('nav.logout')}</span>
-                  </button>
                 </div>
 
-                <Link
-                  to="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
                 >
-                  <LayoutDashboard className="w-5 h-5 text-school-600" />
-                  <span>{t('nav.dashboard')}</span>
-                </Link>
-                <Link
-                  to="/tickets"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-                >
-                  <TicketIcon className="w-5 h-5 text-school-600" />
-                  <span>{t('nav.tickets')}</span>
-                </Link>
-                <Link
-                  to="/labs"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-                >
-                  <Layers className="w-5 h-5 text-school-600" />
-                  <span>{t('nav.labs')}</span>
-                </Link>
-                <Link
-                  to="/devices"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
-                >
-                  <Server className="w-5 h-5 text-school-600" />
-                  <span>{t('nav.devices')}</span>
-                </Link>
-              </>
-            ) : (
-              <div className="pt-2 border-t border-slate-100">
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <button
-                    type="button"
-                    className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>{t('nav.login')}</span>
-                  </button>
-                </Link>
+                  <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
+                  <span>{t('nav.logout')}</span>
+                </button>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+              >
+                <LayoutDashboard className="w-5 h-5 text-school-600" />
+                <span>{t('nav.dashboard')}</span>
+              </Link>
+              <Link
+                to="/tickets"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+              >
+                <TicketIcon className="w-5 h-5 text-school-600" />
+                <span>{t('nav.tickets')}</span>
+              </Link>
+              <Link
+                to="/labs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+              >
+                <Layers className="w-5 h-5 text-school-600" />
+                <span>{t('nav.labs')}</span>
+              </Link>
+              <Link
+                to="/devices"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+              >
+                <Server className="w-5 h-5 text-school-600" />
+                <span>{t('nav.devices')}</span>
+              </Link>
+            </>
+          ) : (
+            <div className="pt-2 border-t border-slate-100">
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                <button
+                  type="button"
+                  className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>{t('nav.login')}</span>
+                </button>
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
     </header>
   );
 };
