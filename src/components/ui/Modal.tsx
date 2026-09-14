@@ -64,14 +64,14 @@ export const Modal: React.FC<ModalProps> = ({
       {/* Modal Dialog Container */}
       <div className="relative z-10 flex min-h-full items-center justify-center p-3 sm:p-6 text-center">
         <div
-          className={`relative z-20 w-full ${maxWidthClasses} max-h-[92vh] flex flex-col transform overflow-hidden rounded-3xl bg-white text-left align-middle shadow-2xl border border-slate-200 transition-all animate-slide-up ring-1 ring-black/10`}
+          className={`relative z-20 w-full ${maxWidthClasses} max-h-[92vh] max-h-[92dvh] flex flex-col transform overflow-hidden rounded-2xl sm:rounded-3xl bg-white text-left rtl:text-right align-middle shadow-2xl border border-slate-200 transition-all animate-slide-up ring-1 ring-black/10`}
           style={{ backgroundColor: '#ffffff', opacity: 1 }}
           onClick={e => e.stopPropagation()}
         >
           {/* Header (Sticky / Fixed at top of modal) */}
           {(title || showCloseButton) && (
-            <div className="flex items-start justify-between border-b border-slate-100 p-4 sm:p-6 bg-slate-50/70 flex-shrink-0">
-              <div className="min-w-0 flex-1 pr-2">
+            <div className="flex items-start justify-between border-b border-slate-100 p-4 sm:p-6 bg-slate-50/70 flex-shrink-0 gap-3">
+              <div className="min-w-0 flex-1 pe-2">
                 {title && <div className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">{title}</div>}
                 {subtitle && <p className="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium truncate">{subtitle}</p>}
               </div>
@@ -79,7 +79,7 @@ export const Modal: React.FC<ModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-xl p-1.5 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors flex-shrink-0"
+                  className="rounded-xl p-1.5 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors flex-shrink-0 cursor-pointer"
                 >
                   <X className="h-5 w-5" />
                 </button>

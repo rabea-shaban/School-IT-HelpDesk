@@ -70,16 +70,16 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
       </div>
 
       {/* Date Range Quick Filter Pills */}
-      <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100">
-        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 ml-2 rtl:ml-0 rtl:mr-2">
-          <Calendar className="w-3.5 h-3.5 text-school-600" />
+      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-2 border-t border-slate-100">
+        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 me-2">
+          <Calendar className="w-3.5 h-3.5 text-school-600 shrink-0" />
           <span>{t('common.period')}:</span>
         </span>
 
         <button
           type="button"
           onClick={() => onDateFilterChange('all')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             dateFilter === 'all'
               ? 'bg-school-600 text-white shadow-xs'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -91,7 +91,7 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
         <button
           type="button"
           onClick={() => onDateFilterChange('7days')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             dateFilter === '7days'
               ? 'bg-school-600 text-white shadow-xs'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -103,7 +103,7 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
         <button
           type="button"
           onClick={() => onDateFilterChange('15days')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             dateFilter === '15days'
               ? 'bg-school-600 text-white shadow-xs'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -115,7 +115,7 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
         <button
           type="button"
           onClick={() => onDateFilterChange('30days')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             dateFilter === '30days'
               ? 'bg-school-600 text-white shadow-xs'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -127,7 +127,7 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
         <button
           type="button"
           onClick={() => onDateFilterChange('custom')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition-all ${
+          className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
             dateFilter === 'custom'
               ? 'bg-indigo-600 text-white shadow-xs'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -140,24 +140,24 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
 
       {/* Custom Date Inputs (if custom is active) */}
       {dateFilter === 'custom' && (
-        <div className="p-3.5 rounded-xl bg-indigo-50/50 border border-indigo-100 flex flex-wrap items-center gap-3 animate-fadeIn">
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-bold text-slate-700">{t('common.fromDate')}:</label>
+        <div className="p-3.5 rounded-xl bg-indigo-50/50 border border-indigo-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 animate-fadeIn">
+          <div className="flex items-center gap-2 flex-1">
+            <label className="text-xs font-bold text-slate-700 shrink-0">{t('common.fromDate')}:</label>
             <input
               type="date"
               value={startDate}
               onChange={e => onStartDateChange(e.target.value)}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-200"
+              className="w-full sm:w-auto px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-200"
             />
           </div>
 
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-bold text-slate-700">{t('common.toDate')}:</label>
+          <div className="flex items-center gap-2 flex-1">
+            <label className="text-xs font-bold text-slate-700 shrink-0">{t('common.toDate')}:</label>
             <input
               type="date"
               value={endDate}
               onChange={e => onEndDateChange(e.target.value)}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-200"
+              className="w-full sm:w-auto px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-mono font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-200"
             />
           </div>
 
@@ -168,7 +168,7 @@ export const TicketFilters: React.FC<TicketFiltersProps> = ({
                 onStartDateChange('');
                 onEndDateChange('');
               }}
-              className="text-[11px] font-bold text-indigo-700 hover:underline"
+              className="text-xs font-bold text-indigo-700 hover:underline text-center sm:text-start self-center sm:self-auto cursor-pointer"
             >
               {t('common.clearDate')}
             </button>

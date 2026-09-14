@@ -53,20 +53,20 @@ export const StatCard: React.FC<StatCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-2xl border p-5 sm:p-6 shadow-sm shadow-slate-900/5 transition-all duration-200 ${variantStyles.border} ${
-        onClick ? 'cursor-pointer hover:shadow-md hover:-translate-y-0.5' : ''
+      className={`bg-white rounded-2xl border p-3.5 sm:p-4 lg:p-5 shadow-sm shadow-slate-900/5 transition-all duration-200 ${variantStyles.border} ${
+        onClick ? 'cursor-pointer hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]' : ''
       }`}
     >
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-semibold text-slate-500 tracking-wide uppercase">{title}</span>
-        <div className={`p-2.5 rounded-xl ${variantStyles.iconBg}`}>{icon}</div>
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[11px] sm:text-xs font-bold text-slate-500 tracking-wide uppercase truncate">{title}</span>
+        <div className={`p-2 rounded-xl shrink-0 ${variantStyles.iconBg}`}>{icon}</div>
       </div>
 
-      <div className="mt-4 flex items-baseline justify-between">
-        <div className="text-3xl font-extrabold text-slate-900 tracking-tight">{value}</div>
+      <div className="mt-3 sm:mt-4 flex items-baseline justify-between gap-2">
+        <div className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight font-mono">{value}</div>
         {trend && (
           <span
-            className={`text-xs font-semibold px-2 py-0.5 rounded-md ${
+            className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-md shrink-0 ${
               trend.isPositive ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
             }`}
           >
@@ -75,7 +75,7 @@ export const StatCard: React.FC<StatCardProps> = ({
         )}
       </div>
 
-      {description && <p className="mt-2 text-xs text-slate-500 leading-relaxed">{description}</p>}
+      {description && <p className="mt-1.5 sm:mt-2 text-[11px] sm:text-xs text-slate-500 leading-tight line-clamp-1 sm:line-clamp-2">{description}</p>}
     </div>
   );
 };

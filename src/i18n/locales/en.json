@@ -83,7 +83,11 @@
     "liveCount": "Live ({{count}})",
     "startWorking": "Start Working",
     "resolve": "Resolve Ticket",
-    "reopen": "Reopen"
+    "reopen": "Reopen",
+    "backToTickets": "Back to All Tickets",
+    "ticketNotFound": "Ticket Not Found",
+    "ticketNotFoundDesc": "The requested ticket does not exist or has been removed from the database.",
+    "lastUpdated": "Last updated"
   },
   "jobTitles": {
     "Teacher": "Teacher",

@@ -83,7 +83,11 @@
     "liveCount": "مباشر ({{count}})",
     "startWorking": "بدء الصيانة",
     "resolve": "إتمام التصليح",
-    "reopen": "إعادة فتح"
+    "reopen": "إعادة فتح",
+    "backToTickets": "العودة إلى سجل البلاغات",
+    "ticketNotFound": "البلاغ غير موجود",
+    "ticketNotFoundDesc": "البلاغ المطلوب غير متوفر أو تم حذفه من قاعدة البيانات.",
+    "lastUpdated": "آخر تحديث"
   },
   "jobTitles": {
     "Teacher": "معلم",

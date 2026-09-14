@@ -76,25 +76,25 @@ export const DeviceTable: React.FC<DeviceTableProps> = ({
   return (
     <div className="space-y-4">
       {/* Search & Filter Controls */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col lg:flex-row items-center gap-3">
+      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-stretch sm:items-center gap-3">
         {/* Search */}
-        <div className="relative flex-1 w-full">
+        <div className="relative flex-1 w-full min-w-[200px]">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 rtl:left-auto rtl:right-3.5" />
           <input
             type="text"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             placeholder={t('devices.searchPlaceholder')}
-            className="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white text-base sm:text-sm font-medium text-slate-900 focus:outline-none focus:ring-4 focus:ring-school-100"
+            className="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white text-base sm:text-sm font-medium text-slate-900 focus:outline-none focus:ring-4 focus:ring-school-100 transition-all"
           />
         </div>
 
         {/* Floor Filter */}
-        <div className="w-full sm:w-48">
+        <div className="w-full sm:w-auto sm:min-w-[160px] flex-1 lg:flex-none">
           <select
             value={floorFilter}
             onChange={e => setFloorFilter(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100"
+            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100 cursor-pointer"
           >
             <option value="all">{t('devices.filterAllFloors')}</option>
             <option value="ground">{isEn ? 'Ground Floor (4 PCs)' : 'الدور الأرضي (4 أجهزة)'}</option>
@@ -106,11 +106,11 @@ export const DeviceTable: React.FC<DeviceTableProps> = ({
         </div>
 
         {/* Lab/Area Filter */}
-        <div className="w-full sm:w-56">
+        <div className="w-full sm:w-auto sm:min-w-[180px] flex-1 lg:flex-none">
           <select
             value={labFilter}
             onChange={e => setLabFilter(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100"
+            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100 cursor-pointer"
           >
             <option value="all">{t('devices.filterAllLabs')}</option>
             <option value="1">{isEn ? 'Computer Lab 1 (25 PCs)' : 'معمل 1 كمبيوتر (25 جهاز)'}</option>
@@ -124,11 +124,11 @@ export const DeviceTable: React.FC<DeviceTableProps> = ({
         </div>
 
         {/* Status Filter */}
-        <div className="w-full sm:w-40">
+        <div className="w-full sm:w-auto sm:min-w-[130px] flex-1 lg:flex-none">
           <select
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100"
+            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-school-100 cursor-pointer"
           >
             <option value="all">{t('common.all')}</option>
             <option value="has_issue">{t('devices.hasIssue')}</option>
