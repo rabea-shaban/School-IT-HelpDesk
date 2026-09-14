@@ -84,19 +84,13 @@ export const Navbar: React.FC = () => {
               />
             </div>
 
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="font-black text-xs sm:text-sm lg:text-base tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap">
-                  {t('nav.title')}
-                </span>
-                <span className="hidden 2xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] font-black uppercase tracking-wider shadow-2xs whitespace-nowrap">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  {t('nav.internalBadge')}
-                </span>
-              </div>
-              <p className="text-[10px] sm:text-[11px] text-slate-500 font-bold hidden xl:block truncate">
+            <div className="flex flex-col justify-center min-w-0">
+              <span className="font-black text-xs sm:text-sm lg:text-[15px] tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap leading-tight">
+                {t('nav.title')}
+              </span>
+              <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold whitespace-nowrap leading-tight mt-0.5">
                 {t('nav.subtitle')}
-              </p>
+              </span>
             </div>
           </Link>
 
