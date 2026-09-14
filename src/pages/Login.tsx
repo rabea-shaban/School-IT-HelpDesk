@@ -55,11 +55,24 @@ export const Login: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 flex flex-col justify-center py-10 sm:py-12 px-4 sm:px-6 lg:px-8 selection:bg-school-500 selection:text-white">
       {/* Brand Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-flex items-center gap-3 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-school-500 to-school-700 text-white flex items-center justify-center shadow-lg shadow-school-600/30 group-hover:scale-105 transition-transform">
-            <Monitor className="w-6 h-6" />
+        <Link to="/" className="inline-flex flex-col items-center gap-3 group">
+          <div className="flex items-center justify-center gap-3">
+            <div className="bg-white p-1.5 rounded-2xl shadow-md">
+              <img
+                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                alt="وزارة التربية والتعليم"
+                className="w-12 h-12 object-contain rounded-full"
+              />
+            </div>
+            <div className="bg-white p-1.5 rounded-2xl shadow-md">
+              <img
+                src="/logo_AT.jpg"
+                alt="التكنولوجيا التطبيقية"
+                className="h-12 w-auto object-contain rounded-xl"
+              />
+            </div>
           </div>
-          <span className="font-extrabold text-2xl tracking-tight text-white">
+          <span className="font-black text-2xl tracking-tight text-white group-hover:text-school-400 transition-colors">
             {t('nav.title')}
           </span>
         </Link>

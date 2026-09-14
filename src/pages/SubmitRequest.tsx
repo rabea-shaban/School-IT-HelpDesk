@@ -47,35 +47,53 @@ export const SubmitRequest: React.FC = () => {
       <Navbar />
 
       {/* Hero Header */}
-      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-850 text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-school-500/10 border border-school-400/20 text-school-300 text-xs font-bold tracking-wide uppercase mb-1">
+      <section className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-850 text-white py-10 sm:py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-5">
+          {/* Official Logos Header Banner */}
+          <div className="flex items-center justify-center gap-3 sm:gap-6 pb-1">
+            <div className="bg-white/95 p-1.5 sm:p-2 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm">
+              <img
+                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                alt="جمهورية مصر العربية - وزارة التربية والتعليم والتعليم الفني"
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-full"
+              />
+            </div>
+            <div className="bg-white/95 p-1.5 sm:p-2 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm">
+              <img
+                src="/logo_AT.jpg"
+                alt="مدارس التكنولوجيا التطبيقية - Applied Technology"
+                className="h-12 sm:h-16 w-auto object-contain rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-school-500/15 border border-school-400/30 text-school-300 text-xs font-bold tracking-wide uppercase">
             <Sparkles className="w-3.5 h-3.5 text-school-400" />
             {t('submit.heroBadge')}
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
             {t('submit.heroTitle')}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
             {t('submit.heroSubtitle', { labs: TOTAL_LABS_COUNT, devices: TOTAL_SCHOOL_DEVICES_COUNT })}
           </p>
 
           {/* Feature Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs font-medium text-slate-400">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-emerald-400" />
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 text-xs font-semibold text-slate-300">
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
+              <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
               {t('submit.badgeNoAccount')}
             </span>
-            <span>&bull;</span>
-            <span className="flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-amber-400" />
+            <span className="hidden sm:inline text-slate-600">&bull;</span>
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
+              <Zap className="w-3.5 h-3.5 text-amber-400" />
               {t('submit.badgeDirectDispatch')}
             </span>
-            <span>&bull;</span>
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-school-400" />
+            <span className="hidden sm:inline text-slate-600">&bull;</span>
+            <span className="flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
+              <ShieldCheck className="w-3.5 h-3.5 text-school-400" />
               {t('submit.badgeTrackingId')}
             </span>
           </div>

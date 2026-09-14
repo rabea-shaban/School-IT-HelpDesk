@@ -41,20 +41,29 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-school-600 to-school-800 text-white flex items-center justify-center shadow-md shadow-school-600/20 group-hover:scale-105 transition-transform">
-              <Monitor className="w-5 h-5" />
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3.5 group">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <img
+                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                alt="وزارة التربية والتعليم"
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain rounded-full bg-white shadow-xs p-0.5 border border-slate-200/80 group-hover:scale-105 transition-transform"
+              />
+              <img
+                src="/logo_AT.jpg"
+                alt="التكنولوجيا التطبيقية"
+                className="h-7 sm:h-9 w-auto object-contain rounded-lg bg-white shadow-xs p-0.5 border border-slate-200/80 group-hover:scale-105 transition-transform"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-school-600 transition-colors">
+                <span className="font-black text-sm sm:text-base lg:text-lg tracking-tight text-slate-900 group-hover:text-school-600 transition-colors">
                   {t('nav.title')}
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-school-100 text-school-800">
+                <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-school-100 text-school-800 hidden sm:inline-block">
                   {t('nav.internalBadge')}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
+              <p className="text-[11px] text-slate-500 font-medium hidden md:block">
                 {t('nav.subtitle')}
               </p>
             </div>

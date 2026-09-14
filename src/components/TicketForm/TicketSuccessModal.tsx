@@ -77,12 +77,24 @@ export const TicketSuccessModal: React.FC<TicketSuccessModalProps> = ({
           style={{ backgroundColor: '#ffffff', opacity: 1 }}
           onClick={e => e.stopPropagation()}
         >
-          {/* Header Icon */}
+          {/* Header Logos & Icon */}
           <div className="flex flex-col items-center text-center">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-2 sm:mb-3 shadow-inner">
-              <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10 animate-bounce" />
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <img
+                src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                alt="وزارة التربية والتعليم"
+                className="w-10 h-10 object-contain rounded-full"
+              />
+              <img
+                src="/logo_AT.jpg"
+                alt="التكنولوجيا التطبيقية"
+                className="h-10 w-auto object-contain rounded-lg"
+              />
             </div>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-2 shadow-inner">
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               {t('submit.successModalTitle')}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">

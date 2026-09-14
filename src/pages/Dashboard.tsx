@@ -318,6 +318,24 @@ export const Dashboard: React.FC = () => {
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-1.5 bg-white/95 p-1 rounded-xl shadow-xs">
+                <img
+                  src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
+                  alt="وزارة التربية والتعليم"
+                  className="w-6 h-6 object-contain rounded-full"
+                />
+                <img
+                  src="/logo_AT.jpg"
+                  alt="التكنولوجيا التطبيقية"
+                  className="h-6 w-auto object-contain rounded"
+                />
+              </div>
+              <span className="text-[11px] font-bold text-school-200 uppercase tracking-widest">
+                {t('nav.internalBadge')}
+              </span>
+            </div>
+
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
                 {t('dashboard.heroTitle')}
