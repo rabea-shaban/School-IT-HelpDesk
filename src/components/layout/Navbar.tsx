@@ -260,12 +260,12 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile & Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-lg">
+        <div className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2 animate-fadeIn shadow-xl">
           {isAdmin ? (
             <>
               {/* User Profile Card in mobile drawer */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 min-w-0">
+              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3 mb-3">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
                     {userInitials}
                   </div>
@@ -282,48 +282,77 @@ export const Navbar: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
                 >
                   <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
                   <span>{t('nav.logout')}</span>
                 </button>
               </div>
 
+              {/* Navigation Links with Active State */}
               <Link
                 to="/dashboard"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                  isActive('/dashboard')
+                    ? 'bg-school-50 text-school-700 border border-school-200/80'
+                    : 'hover:bg-slate-50 text-slate-700'
+                }`}
               >
-                <LayoutDashboard className="w-5 h-5 text-school-600" />
+                <LayoutDashboard className={`w-5 h-5 ${isActive('/dashboard') ? 'text-school-600' : 'text-slate-400'}`} />
                 <span>{t('nav.dashboard')}</span>
               </Link>
+
               <Link
                 to="/tickets"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                  isActive('/tickets')
+                    ? 'bg-school-50 text-school-700 border border-school-200/80'
+                    : 'hover:bg-slate-50 text-slate-700'
+                }`}
               >
-                <TicketIcon className="w-5 h-5 text-school-600" />
+                <TicketIcon className={`w-5 h-5 ${isActive('/tickets') ? 'text-school-600' : 'text-slate-400'}`} />
                 <span>{t('nav.tickets')}</span>
               </Link>
+
               <Link
                 to="/labs"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                  isActive('/labs')
+                    ? 'bg-school-50 text-school-700 border border-school-200/80'
+                    : 'hover:bg-slate-50 text-slate-700'
+                }`}
               >
-                <Layers className="w-5 h-5 text-school-600" />
+                <Layers className={`w-5 h-5 ${isActive('/labs') ? 'text-school-600' : 'text-slate-400'}`} />
                 <span>{t('nav.labs')}</span>
               </Link>
+
               <Link
                 to="/devices"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100 text-slate-700 font-bold text-sm transition-colors"
+                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                  isActive('/devices')
+                    ? 'bg-school-50 text-school-700 border border-school-200/80'
+                    : 'hover:bg-slate-50 text-slate-700'
+                }`}
               >
-                <Server className="w-5 h-5 text-school-600" />
+                <Server className={`w-5 h-5 ${isActive('/devices') ? 'text-school-600' : 'text-slate-400'}`} />
                 <span>{t('nav.devices')}</span>
               </Link>
             </>
           ) : (
-            <div className="pt-2 border-t border-slate-100">
+            <div className="pt-2 space-y-2">
+              <Link
+                to="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 p-3 rounded-xl bg-school-50 text-school-700 font-bold text-sm border border-school-200/70"
+              >
+                <Plus className="w-5 h-5 text-school-600" />
+                <span>{t('nav.submitRequest')}</span>
+              </Link>
+
               <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                 <button
                   type="button"
