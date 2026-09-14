@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Navbar } from './Navbar';
-import { Sidebar } from './Sidebar';
+import { Footer } from './Footer';
 import { Skeleton } from '../ui/Skeleton';
 
 export const AdminLayout: React.FC = () => {
@@ -10,9 +10,9 @@ export const AdminLayout: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col">
+      <div className="min-h-screen bg-slate-50 flex flex-col selection:bg-school-500 selection:text-white">
         <Navbar />
-        <div className="flex-1 max-w-7xl mx-auto w-full p-6 space-y-6">
+        <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6">
           <Skeleton className="h-10 w-64" />
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Skeleton className="h-32 rounded-2xl" />
@@ -21,7 +21,8 @@ export const AdminLayout: React.FC = () => {
             <Skeleton className="h-32 rounded-2xl" />
           </div>
           <Skeleton className="h-96 rounded-2xl" />
-        </div>
+        </main>
+        <Footer />
       </div>
     );
   }
@@ -31,14 +32,13 @@ export const AdminLayout: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 flex flex-col selection:bg-school-500 selection:text-white">
       <Navbar />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-y-auto">
-          <Outlet />
-        </main>
-      </div>
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 };
+

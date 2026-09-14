@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
       {/* Top Brand Accent Line */}
       <div className="h-0.5 sm:h-1 w-full bg-gradient-to-r from-school-600 via-orange-500 to-indigo-600" />
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-2 lg:gap-4">
           {/* Logo & Brand Unit */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group select-none shrink-0">
