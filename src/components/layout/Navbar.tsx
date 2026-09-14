@@ -14,6 +14,7 @@ import {
   Shield,
   ChevronDown,
   User,
+  Globe,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
@@ -48,6 +49,7 @@ export const Navbar: React.FC = () => {
 
   const handleLogout = async () => {
     setUserDropdownOpen(false);
+    setMobileMenuOpen(false);
     await logout();
     navigate('/');
   };
@@ -66,11 +68,11 @@ export const Navbar: React.FC = () => {
       <div className="h-0.5 sm:h-1 w-full bg-gradient-to-r from-school-600 via-orange-500 to-indigo-600" />
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-4">
+        <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-3 sm:gap-4">
           
           {/* SECTION 1: Brand & School Logo */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-700/80 shadow-xs flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
+            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-700/80 shadow-xs flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300 shrink-0">
               <img
                 src="/logochool.svg"
                 alt="B.TECH"
@@ -85,16 +87,16 @@ export const Navbar: React.FC = () => {
             </div>
 
             <div className="flex flex-col justify-center min-w-0">
-              <span className="font-black text-xs sm:text-sm lg:text-[15px] tracking-tight text-slate-900 group-hover:text-school-600 transition-colors whitespace-nowrap leading-tight">
+              <span className="font-black text-xs sm:text-sm lg:text-[15px] tracking-tight text-slate-900 group-hover:text-school-600 transition-colors truncate leading-tight">
                 {t('nav.title')}
               </span>
-              <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold whitespace-nowrap leading-tight mt-0.5">
+              <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold truncate leading-tight mt-0.5">
                 {t('nav.subtitle')}
               </span>
             </div>
           </Link>
 
-          {/* SECTION 2: Center Navigation Tabs */}
+          {/* SECTION 2: Center Navigation Tabs (Desktop only) */}
           {isAdmin && (
             <nav className="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shadow-2xs shrink-0">
               <Link
@@ -147,110 +149,109 @@ export const Navbar: React.FC = () => {
             </nav>
           )}
 
-          {/* SECTION 3: Action Hub */}
+          {/* SECTION 3: Action Hub (Desktop) & Mobile Hamburger Button */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Language Switcher */}
-            <LanguageToggle variant="pill" className="hidden sm:inline-flex" />
-            <LanguageToggle variant="compact" className="sm:hidden" />
+            {/* Desktop Actions (Hidden on Mobile/Tablet) */}
+            <div className="hidden lg:flex items-center gap-3">
+              {/* Language Switcher */}
+              <LanguageToggle variant="pill" />
 
-            {/* Admin Profile Dropdown */}
-            {isAdmin ? (
-              <div className="relative" ref={userMenuRef}>
-                <button
-                  type="button"
-                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2 p-1 sm:p-1.5 rounded-2xl hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300 transition-all cursor-pointer group active:scale-95 bg-slate-50/80 shadow-2xs"
-                  aria-expanded={userDropdownOpen}
-                  aria-label="User menu"
-                >
-                  <div className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
-                    {userInitials}
-                  </div>
-                  <div className="hidden md:block text-right rtl:text-right ltr:text-left min-w-0 pr-1 pl-1">
-                    <p className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
-                      {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-medium leading-none">
-                      {t('nav.itAdmin')}
-                    </p>
-                  </div>
-                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown Menu */}
-                {userDropdownOpen && (
-                  <div className="absolute left-0 rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-fadeIn divide-y divide-slate-100">
-                    {/* User Info Header */}
-                    <div className="px-4 py-3 text-right rtl:text-right ltr:text-left">
-                      <div className="flex items-center gap-2.5 mb-1.5">
-                        <div className="w-8 h-8 rounded-lg bg-school-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                          {userInitials}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xs font-black text-slate-900 truncate">
-                            {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
-                          </p>
-                          <p className="text-[11px] text-slate-500 font-medium truncate">
-                            {user?.email || t('nav.authenticatedAdmin')}
-                          </p>
-                        </div>
-                      </div>
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-school-50 text-school-700 text-[10px] font-bold border border-school-200/70">
-                        <Shield className="w-3 h-3 text-school-600" />
+              {/* Admin Profile Dropdown / Login Button */}
+              {isAdmin ? (
+                <div className="relative" ref={userMenuRef}>
+                  <button
+                    type="button"
+                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                    className="flex items-center gap-2 p-1.5 rounded-2xl hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300 transition-all cursor-pointer group active:scale-95 bg-slate-50/80 shadow-2xs"
+                    aria-expanded={userDropdownOpen}
+                    aria-label="User menu"
+                  >
+                    <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
+                      {userInitials}
+                    </div>
+                    <div className="text-right rtl:text-right ltr:text-left min-w-0 px-1">
+                      <p className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
+                        {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-medium leading-none">
                         {t('nav.itAdmin')}
-                      </span>
+                      </p>
                     </div>
+                    <ChevronDown className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-                    {/* Quick Nav Links inside dropdown */}
-                    <div className="py-1.5 px-1.5 space-y-0.5 text-right rtl:text-right ltr:text-left">
-                      <Link
-                        to="/dashboard"
-                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-school-600 transition-colors"
-                      >
-                        <LayoutDashboard className="w-4 h-4 text-slate-400" />
-                        <span>{t('nav.dashboard')}</span>
-                      </Link>
-                      <Link
-                        to="/tickets"
-                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-school-600 transition-colors"
-                      >
-                        <TicketIcon className="w-4 h-4 text-slate-400" />
-                        <span>{t('nav.tickets')}</span>
-                      </Link>
+                  {/* Dropdown Menu */}
+                  {userDropdownOpen && (
+                    <div className="absolute left-0 rtl:left-0 rtl:right-auto ltr:right-0 ltr:left-auto mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-fadeIn divide-y divide-slate-100">
+                      <div className="px-4 py-3 text-right rtl:text-right ltr:text-left">
+                        <div className="flex items-center gap-2.5 mb-1.5">
+                          <div className="w-8 h-8 rounded-lg bg-school-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
+                            {userInitials}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-xs font-black text-slate-900 truncate">
+                              {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                            </p>
+                            <p className="text-[11px] text-slate-500 font-medium truncate">
+                              {user?.email || t('nav.authenticatedAdmin')}
+                            </p>
+                          </div>
+                        </div>
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-school-50 text-school-700 text-[10px] font-bold border border-school-200/70">
+                          <Shield className="w-3 h-3 text-school-600" />
+                          {t('nav.itAdmin')}
+                        </span>
+                      </div>
+
+                      <div className="py-1.5 px-1.5 space-y-0.5 text-right rtl:text-right ltr:text-left">
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-school-600 transition-colors"
+                        >
+                          <LayoutDashboard className="w-4 h-4 text-slate-400" />
+                          <span>{t('nav.dashboard')}</span>
+                        </Link>
+                        <Link
+                          to="/tickets"
+                          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-school-600 transition-colors"
+                        >
+                          <TicketIcon className="w-4 h-4 text-slate-400" />
+                          <span>{t('nav.tickets')}</span>
+                        </Link>
+                      </div>
+
+                      <div className="p-1.5">
+                        <button
+                          type="button"
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors text-right rtl:text-right ltr:text-left cursor-pointer"
+                        >
+                          <LogOut className="w-4 h-4 rtl:rotate-180 text-rose-500" />
+                          <span>{t('nav.logout')}</span>
+                        </button>
+                      </div>
                     </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-95"
+                >
+                  <LogIn className="w-4 h-4 shrink-0" />
+                  <span>{t('nav.login')}</span>
+                </Link>
+              )}
+            </div>
 
-                    {/* Logout Button */}
-                    <div className="p-1.5">
-                      <button
-                        type="button"
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors text-right rtl:text-right ltr:text-left cursor-pointer"
-                      >
-                        <LogOut className="w-4 h-4 rtl:rotate-180 text-rose-500" />
-                        <span>{t('nav.logout')}</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-xs transition-all active:scale-95"
-              >
-                <LogIn className="w-4 h-4 shrink-0" />
-                <span>{t('nav.login')}</span>
-              </Link>
-            )}
-
-            {/* Mobile Menu Hamburger Trigger */}
+            {/* Mobile & Tablet Hamburger Button (ONLY element on mobile besides logo) */}
             <div className="lg:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200/80 bg-white shadow-2xs cursor-pointer"
+                className="p-2 sm:p-2.5 rounded-2xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200 bg-white shadow-2xs cursor-pointer flex items-center justify-center"
                 aria-label="Toggle navigation menu"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}
               </button>
             </div>
           </div>
@@ -258,13 +259,14 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile & Tablet Drawer Menu */}
+      {/* Mobile & Tablet Drawer Menu (Opens on Menu click) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2 animate-fadeIn shadow-xl">
-          {isAdmin ? (
-            <>
-              {/* User Profile Card in mobile drawer */}
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3 mb-3">
+        <div className="lg:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-2xl divide-y divide-slate-100">
+          
+          {/* SECTION A: User Profile Card or Login Button */}
+          <div className="pt-1 pb-2">
+            {isAdmin ? (
+              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
                     {userInitials}
@@ -288,71 +290,7 @@ export const Navbar: React.FC = () => {
                   <span>{t('nav.logout')}</span>
                 </button>
               </div>
-
-              {/* Navigation Links with Active State */}
-              <Link
-                to="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
-                  isActive('/dashboard')
-                    ? 'bg-school-50 text-school-700 border border-school-200/80'
-                    : 'hover:bg-slate-50 text-slate-700'
-                }`}
-              >
-                <LayoutDashboard className={`w-5 h-5 ${isActive('/dashboard') ? 'text-school-600' : 'text-slate-400'}`} />
-                <span>{t('nav.dashboard')}</span>
-              </Link>
-
-              <Link
-                to="/tickets"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
-                  isActive('/tickets')
-                    ? 'bg-school-50 text-school-700 border border-school-200/80'
-                    : 'hover:bg-slate-50 text-slate-700'
-                }`}
-              >
-                <TicketIcon className={`w-5 h-5 ${isActive('/tickets') ? 'text-school-600' : 'text-slate-400'}`} />
-                <span>{t('nav.tickets')}</span>
-              </Link>
-
-              <Link
-                to="/labs"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
-                  isActive('/labs')
-                    ? 'bg-school-50 text-school-700 border border-school-200/80'
-                    : 'hover:bg-slate-50 text-slate-700'
-                }`}
-              >
-                <Layers className={`w-5 h-5 ${isActive('/labs') ? 'text-school-600' : 'text-slate-400'}`} />
-                <span>{t('nav.labs')}</span>
-              </Link>
-
-              <Link
-                to="/devices"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
-                  isActive('/devices')
-                    ? 'bg-school-50 text-school-700 border border-school-200/80'
-                    : 'hover:bg-slate-50 text-slate-700'
-                }`}
-              >
-                <Server className={`w-5 h-5 ${isActive('/devices') ? 'text-school-600' : 'text-slate-400'}`} />
-                <span>{t('nav.devices')}</span>
-              </Link>
-            </>
-          ) : (
-            <div className="pt-2 space-y-2">
-              <Link
-                to="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-xl bg-school-50 text-school-700 font-bold text-sm border border-school-200/70"
-              >
-                <Plus className="w-5 h-5 text-school-600" />
-                <span>{t('nav.submitRequest')}</span>
-              </Link>
-
+            ) : (
               <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                 <button
                   type="button"
@@ -362,8 +300,90 @@ export const Navbar: React.FC = () => {
                   <span>{t('nav.login')}</span>
                 </button>
               </Link>
+            )}
+          </div>
+
+          {/* SECTION B: Navigation Links */}
+          <div className="pt-3 space-y-1.5">
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                isActive('/') && location.pathname === '/'
+                  ? 'bg-school-50 text-school-700 border border-school-200/80'
+                  : 'hover:bg-slate-50 text-slate-700'
+              }`}
+            >
+              <Plus className="w-5 h-5 text-school-600" />
+              <span>{t('nav.submitRequest')}</span>
+            </Link>
+
+            {isAdmin && (
+              <>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                    isActive('/dashboard')
+                      ? 'bg-school-50 text-school-700 border border-school-200/80'
+                      : 'hover:bg-slate-50 text-slate-700'
+                  }`}
+                >
+                  <LayoutDashboard className={`w-5 h-5 ${isActive('/dashboard') ? 'text-school-600' : 'text-slate-400'}`} />
+                  <span>{t('nav.dashboard')}</span>
+                </Link>
+
+                <Link
+                  to="/tickets"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                    isActive('/tickets')
+                      ? 'bg-school-50 text-school-700 border border-school-200/80'
+                      : 'hover:bg-slate-50 text-slate-700'
+                  }`}
+                >
+                  <TicketIcon className={`w-5 h-5 ${isActive('/tickets') ? 'text-school-600' : 'text-slate-400'}`} />
+                  <span>{t('nav.tickets')}</span>
+                </Link>
+
+                <Link
+                  to="/labs"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                    isActive('/labs')
+                      ? 'bg-school-50 text-school-700 border border-school-200/80'
+                      : 'hover:bg-slate-50 text-slate-700'
+                  }`}
+                >
+                  <Layers className={`w-5 h-5 ${isActive('/labs') ? 'text-school-600' : 'text-slate-400'}`} />
+                  <span>{t('nav.labs')}</span>
+                </Link>
+
+                <Link
+                  to="/devices"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
+                    isActive('/devices')
+                      ? 'bg-school-50 text-school-700 border border-school-200/80'
+                      : 'hover:bg-slate-50 text-slate-700'
+                  }`}
+                >
+                  <Server className={`w-5 h-5 ${isActive('/devices') ? 'text-school-600' : 'text-slate-400'}`} />
+                  <span>{t('nav.devices')}</span>
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* SECTION C: Language Switcher in Mobile Drawer */}
+          <div className="pt-3 flex items-center justify-between px-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
+              <Globe className="w-4 h-4 text-school-600" />
+              <span>{t('common.language') || 'اللغة / Language'}</span>
             </div>
-          )}
+            <LanguageToggle variant="pill" />
+          </div>
+
         </div>
       )}
     </header>
