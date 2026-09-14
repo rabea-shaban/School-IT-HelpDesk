@@ -77,8 +77,8 @@ export const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shrink-0">
+          {/* Desktop Navigation (Visible on xl screens and above to guarantee no clipping) */}
+          <nav className="hidden xl:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shrink-0">
             <Link
               to="/"
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
@@ -145,18 +145,18 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Right Action & Language Toggle */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
+          <div className="hidden sm:flex items-center gap-2 lg:gap-3 shrink-0">
             <LanguageToggle variant="pill" />
 
             {isAdmin ? (
-              <div className="flex items-center gap-2 pl-2 border-l border-slate-200 rtl:pl-0 rtl:pr-2 rtl:border-l-0 rtl:border-r">
+              <div className="flex items-center gap-2 pl-2 border-l border-slate-200 rtl:pl-0 rtl:pr-2 rtl:border-l-0 rtl:border-r shrink-0">
                 {/* Modern User Badge */}
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-2xl shadow-2xs">
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-2xl shadow-2xs shrink-0">
                   <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-xs shrink-0">
                     {(user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT').toUpperCase()}
                   </div>
                   <div className="text-right rtl:text-right ltr:text-left min-w-0">
-                    <div className="text-xs font-black text-slate-800 truncate max-w-[90px] xl:max-w-[120px] leading-tight">
+                    <div className="text-xs font-black text-slate-800 truncate max-w-[85px] sm:max-w-[110px] leading-tight">
                       {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
                     </div>
                     <div className="text-[10px] text-school-600 font-bold flex items-center gap-0.5 leading-tight">
@@ -171,16 +171,16 @@ export const Navbar: React.FC = () => {
                   type="button"
                   onClick={handleLogout}
                   title={t('nav.logout')}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-rose-200/80 bg-rose-50/80 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-rose-200/80 bg-rose-50/80 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-all active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
                 >
                   <LogOut className="w-3.5 h-3.5 rtl:rotate-180 shrink-0" />
-                  <span className="hidden xl:inline">{t('nav.logout')}</span>
+                  <span className="hidden 2xl:inline">{t('nav.logout')}</span>
                 </button>
               </div>
             ) : (
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-school-600 to-indigo-600 hover:from-school-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-school-600/30 hover:shadow-md hover:shadow-school-600/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-school-600 to-indigo-600 hover:from-school-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-school-600/30 hover:shadow-md hover:shadow-school-600/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all whitespace-nowrap shrink-0"
               >
                 <LogIn className="w-4 h-4 shrink-0" />
                 <span>{t('nav.login')}</span>
@@ -188,12 +188,14 @@ export const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button & Language Switch */}
-          <div className="flex lg:hidden items-center gap-2">
-            <LanguageToggle variant="compact" />
+          {/* Mobile & Tablet Menu Button & Language Switch */}
+          <div className="flex xl:hidden items-center gap-2 shrink-0">
+            <div className="sm:hidden">
+              <LanguageToggle variant="compact" />
+            </div>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200/80 bg-white"
+              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 active:scale-95 transition-all border border-slate-200/80 bg-white shadow-2xs"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -202,9 +204,9 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile & Tablet Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-200 bg-white/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-lg">
+        <div className="xl:hidden border-b border-slate-200 bg-white/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3 animate-fadeIn shadow-lg">
           <Link
             to="/"
             onClick={() => setMobileMenuOpen(false)}
@@ -216,19 +218,33 @@ export const Navbar: React.FC = () => {
 
           {isAdmin ? (
             <>
-              {/* User Profile Card on mobile */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs">
-                  {(user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT')}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="font-extrabold text-xs text-slate-900">
-                    {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+              {/* User Profile Card in drawer */}
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-xs shrink-0">
+                    {(user?.displayName?.slice(0, 2) || user?.email?.slice(0, 2) || 'IT')}
                   </div>
-                  <div className="text-[11px] text-slate-500 truncate font-medium">
-                    {user?.email || t('nav.authenticatedAdmin')}
+                  <div className="min-w-0">
+                    <div className="font-extrabold text-xs text-slate-900 truncate">
+                      {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                    </div>
+                    <div className="text-[11px] text-slate-500 truncate font-medium">
+                      {user?.email || t('nav.authenticatedAdmin')}
+                    </div>
                   </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleLogout();
+                  }}
+                  className="px-3 py-1.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 font-bold text-xs flex items-center gap-1.5 shrink-0"
+                >
+                  <LogOut className="w-3.5 h-3.5 rtl:rotate-180" />
+                  <span>{t('nav.logout')}</span>
+                </button>
               </div>
 
               <Link
@@ -263,20 +279,6 @@ export const Navbar: React.FC = () => {
                 <Server className="w-5 h-5 text-school-600" />
                 <span>{t('nav.devices')}</span>
               </Link>
-              <div className="pt-3 border-t border-slate-100">
-                <Button
-                  variant="danger"
-                  size="sm"
-                  className="w-full"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleLogout();
-                  }}
-                  leftIcon={<LogOut className="w-4 h-4" />}
-                >
-                  {t('nav.logout')}
-                </Button>
-              </div>
             </>
           ) : (
             <div className="pt-2 border-t border-slate-100">
