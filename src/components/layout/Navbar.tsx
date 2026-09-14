@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -21,7 +22,8 @@ import { Button } from '../ui/Button';
 import { LanguageToggle } from './LanguageToggle';
 
 export const Navbar: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language?.startsWith('ar') ?? true;
   const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -272,189 +274,195 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile & Tablet Off-Canvas Sidebar Drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex">
-          {/* Backdrop Overlay */}
-          <div
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity animate-fadeIn"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
+      {mobileMenuOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[99999] lg:hidden">
+            {/* Backdrop Overlay */}
+            <div
+              className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity animate-fadeIn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
 
-          {/* Sliding Sidebar Panel */}
-          <aside
-            className="relative ms-auto w-80 max-w-[85vw] bg-white h-full shadow-2xl z-10 flex flex-col justify-between animate-fadeIn border-s border-slate-200 overflow-hidden"
-          >
-            {/* 1. Sidebar Header */}
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 bg-slate-50/70">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="bg-[#061426] px-2 py-1 rounded-xl border border-slate-700/80 shadow-xs flex items-center gap-1.5 shrink-0">
-                  <img src="/logochool.svg" alt="B.TECH" className="h-3.5 w-auto object-contain" />
-                  <div className="w-px h-3 bg-white/20" />
-                  <img src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png" alt="MOE" className="w-4 h-4 object-contain" />
-                </div>
-                <span className="font-extrabold text-xs text-slate-900 truncate">
-                  {t('nav.title')}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-200/60 active:scale-95 transition-all cursor-pointer"
-                aria-label="Close menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* 2. Sidebar Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {/* User Profile Card (if admin) */}
-              {isAdmin ? (
-                <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/80 border border-slate-200/90 shadow-xs space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-sm flex items-center justify-center shadow-xs shrink-0">
-                      {userInitials}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-black text-slate-900 truncate">
-                        {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
-                      </p>
-                      <p className="text-[11px] text-slate-500 font-medium truncate">
-                        {user?.email || t('nav.authenticatedAdmin')}
-                      </p>
-                      <span className="inline-flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded bg-school-100 text-school-700 text-[10px] font-bold">
-                        <Shield className="w-2.5 h-2.5" />
-                        {t('nav.itAdmin')}
-                      </span>
-                    </div>
+            {/* Sliding Sidebar Panel */}
+            <aside
+              className={`fixed top-0 bottom-0 ${
+                isArabic ? 'right-0' : 'left-0'
+              } w-80 max-w-[85vw] h-[100dvh] bg-white shadow-2xl z-10 flex flex-col justify-between border-slate-200 ${
+                isArabic ? 'border-l' : 'border-r'
+              } overflow-hidden animate-fadeIn`}
+            >
+              {/* 1. Sidebar Header */}
+              <div className="p-4 border-b border-slate-100 flex items-center justify-between gap-3 bg-slate-50/80 shrink-0">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="bg-[#061426] px-2 py-1 rounded-xl border border-slate-700/80 shadow-xs flex items-center gap-1.5 shrink-0">
+                    <img src="/logochool.svg" alt="B.TECH" className="h-3.5 w-auto object-contain" />
+                    <div className="w-px h-3 bg-white/20" />
+                    <img src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png" alt="MOE" className="w-4 h-4 object-contain" />
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="w-full py-2 px-3 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4 rtl:rotate-180" />
-                    <span>{t('nav.logout')}</span>
-                  </button>
+                  <span className="font-extrabold text-xs text-slate-900 truncate">
+                    {t('nav.title')}
+                  </span>
                 </div>
-              ) : (
-                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <button
-                    type="button"
-                    className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>{t('nav.login')}</span>
-                  </button>
+
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-200/60 active:scale-95 transition-all cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* 2. Sidebar Scrollable Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                {/* User Profile Card (if admin) */}
+                {isAdmin ? (
+                  <div className="p-3.5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/80 border border-slate-200/90 shadow-xs space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-sm flex items-center justify-center shadow-xs shrink-0">
+                        {userInitials}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-black text-slate-900 truncate">
+                          {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
+                        </p>
+                        <p className="text-[11px] text-slate-500 font-medium truncate">
+                          {user?.email || t('nav.authenticatedAdmin')}
+                        </p>
+                        <span className="inline-flex items-center gap-1 mt-1 px-1.5 py-0.5 rounded bg-school-100 text-school-700 text-[10px] font-bold">
+                          <Shield className="w-2.5 h-2.5" />
+                          {t('nav.itAdmin')}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full py-2 px-3 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4 rtl:rotate-180" />
+                      <span>{t('nav.logout')}</span>
+                    </button>
+                  </div>
+                ) : (
+                  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <button
+                      type="button"
+                      className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      <span>{t('nav.login')}</span>
+                    </button>
+                  </Link>
+                )}
+
+                {/* Quick Action: New Ticket */}
+                <Link
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all shadow-xs ${
+                    isActive('/') && location.pathname === '/'
+                      ? 'bg-school-50 text-school-700 border border-school-200/80'
+                      : 'bg-school-600 hover:bg-school-700 text-white shadow-school-600/20'
+                  }`}
+                >
+                  <Plus className="w-5 h-5" />
+                  <span>{t('nav.submitRequest')}</span>
                 </Link>
-              )}
 
-              {/* Quick Action: New Ticket */}
-              <Link
-                to="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all shadow-xs ${
-                  isActive('/') && location.pathname === '/'
-                    ? 'bg-school-50 text-school-700 border border-school-200/80'
-                    : 'bg-school-600 hover:bg-school-700 text-white shadow-school-600/20'
-                }`}
-              >
-                <Plus className="w-5 h-5" />
-                <span>{t('nav.submitRequest')}</span>
-              </Link>
+                {/* Navigation Links */}
+                {isAdmin && (
+                  <div className="space-y-1 pt-2 border-t border-slate-100">
+                    <p className="px-2 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                      {t('nav.dashboard')}
+                    </p>
 
-              {/* Navigation Links */}
-              {isAdmin && (
-                <div className="space-y-1 pt-2 border-t border-slate-100">
-                  <p className="px-2 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
-                    {t('nav.dashboard')}
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                        isActive('/dashboard')
+                          ? 'bg-school-50 text-school-700 border border-school-200/80'
+                          : 'hover:bg-slate-50 text-slate-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <LayoutDashboard className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/dashboard') ? 'text-school-600' : 'text-slate-400'}`} />
+                        <span>{t('nav.dashboard')}</span>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/tickets"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                        isActive('/tickets')
+                          ? 'bg-school-50 text-school-700 border border-school-200/80'
+                          : 'hover:bg-slate-50 text-slate-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <TicketIcon className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/tickets') ? 'text-school-600' : 'text-slate-400'}`} />
+                        <span>{t('nav.tickets')}</span>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/labs"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                        isActive('/labs')
+                          ? 'bg-school-50 text-school-700 border border-school-200/80'
+                          : 'hover:bg-slate-50 text-slate-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Layers className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/labs') ? 'text-school-600' : 'text-slate-400'}`} />
+                        <span>{t('nav.labs')}</span>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/devices"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                        isActive('/devices')
+                          ? 'bg-school-50 text-school-700 border border-school-200/80'
+                          : 'hover:bg-slate-50 text-slate-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Server className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/devices') ? 'text-school-600' : 'text-slate-400'}`} />
+                        <span>{t('nav.devices')}</span>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Sidebar Bottom / Language Switcher */}
+              <div className="p-4 border-t border-slate-100 bg-slate-50/70 space-y-3 shrink-0">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
+                    <Globe className="w-4 h-4 text-school-600" />
+                    <span>{t('common.language') || 'اللغة / Language'}</span>
+                  </div>
+                  <LanguageToggle variant="compact" />
+                </div>
+
+                <div className="text-center pt-1 border-t border-slate-200/60">
+                  <p className="text-[10px] text-slate-400 font-medium">
+                    {t('nav.subtitle')}
                   </p>
-
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
-                      isActive('/dashboard')
-                        ? 'bg-school-50 text-school-700 border border-school-200/80'
-                        : 'hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <LayoutDashboard className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/dashboard') ? 'text-school-600' : 'text-slate-400'}`} />
-                      <span>{t('nav.dashboard')}</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/tickets"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
-                      isActive('/tickets')
-                        ? 'bg-school-50 text-school-700 border border-school-200/80'
-                        : 'hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <TicketIcon className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/tickets') ? 'text-school-600' : 'text-slate-400'}`} />
-                      <span>{t('nav.tickets')}</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/labs"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
-                      isActive('/labs')
-                        ? 'bg-school-50 text-school-700 border border-school-200/80'
-                        : 'hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Layers className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/labs') ? 'text-school-600' : 'text-slate-400'}`} />
-                      <span>{t('nav.labs')}</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/devices"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between p-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
-                      isActive('/devices')
-                        ? 'bg-school-50 text-school-700 border border-school-200/80'
-                        : 'hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Server className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive('/devices') ? 'text-school-600' : 'text-slate-400'}`} />
-                      <span>{t('nav.devices')}</span>
-                    </div>
-                  </Link>
                 </div>
-              )}
-            </div>
-
-            {/* 3. Sidebar Bottom / Language Switcher */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50/70 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
-                  <Globe className="w-4 h-4 text-school-600" />
-                  <span>{t('common.language') || 'اللغة / Language'}</span>
-                </div>
-                <LanguageToggle variant="compact" />
               </div>
-
-              <div className="text-center pt-1 border-t border-slate-200/60">
-                <p className="text-[10px] text-slate-400 font-medium">
-                  {t('nav.subtitle')}
-                </p>
-              </div>
-            </div>
-          </aside>
-        </div>
-      )}
+            </aside>
+          </div>,
+          document.body
+        )}
     </header>
   );
 };
