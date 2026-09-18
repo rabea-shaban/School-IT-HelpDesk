@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { useTranslation } from 'react-i18next';
 import {
@@ -8,6 +9,8 @@ import {
   Printer,
   PlusCircle,
   MapPin,
+  Search,
+  ArrowRight,
 } from 'lucide-react';
 import { Ticket } from '../../types/ticket';
 import { Button } from '../ui/Button';
@@ -176,25 +179,40 @@ export const TicketSuccessModal: React.FC<TicketSuccessModalProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2.5 sm:gap-3 no-print">
-            <Button
-              variant="outline"
-              size="md"
-              className="w-full sm:flex-1 text-xs sm:text-sm py-2 sm:py-2.5"
-              onClick={handlePrint}
-              leftIcon={<Printer className="w-4 h-4 text-slate-500" />}
-            >
-              {t('submit.printTicket')}
-            </Button>
-            <Button
-              variant="primary"
-              size="md"
-              className="w-full sm:flex-1 text-xs sm:text-sm py-2 sm:py-2.5"
-              onClick={onReset}
-              leftIcon={<PlusCircle className="w-4 h-4" />}
-            >
-              {t('submit.submitAnother')}
-            </Button>
+          <div className="mt-4 sm:mt-6 space-y-2.5 no-print">
+            {/* Primary Action: Direct Track Button */}
+            <Link to={`/track/${ticket.ticketNumber}`} className="block w-full">
+              <Button
+                variant="primary"
+                size="md"
+                className="w-full text-xs sm:text-sm py-2.5 shadow-md shadow-school-600/30"
+                rightIcon={<ArrowRight className="w-4 h-4 rtl:rotate-180" />}
+                leftIcon={<Search className="w-4 h-4" />}
+              >
+                {t('track.trackThisTicketNow')}
+              </Button>
+            </Link>
+
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-2.5">
+              <Button
+                variant="outline"
+                size="md"
+                className="w-full sm:flex-1 text-xs sm:text-sm py-2"
+                onClick={handlePrint}
+                leftIcon={<Printer className="w-4 h-4 text-slate-500" />}
+              >
+                {t('submit.printTicket')}
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
+                className="w-full sm:flex-1 text-xs sm:text-sm py-2"
+                onClick={onReset}
+                leftIcon={<PlusCircle className="w-4 h-4" />}
+              >
+                {t('submit.submitAnother')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

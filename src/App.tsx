@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import { AdminLayout } from './components/layout/AdminLayout';
 import { SubmitRequest } from './pages/SubmitRequest';
+import { TrackTicket } from './pages/TrackTicket';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { Tickets } from './pages/Tickets';
@@ -17,8 +18,10 @@ export const App: React.FC = () => {
       <AuthProvider>
         <ToastProvider>
           <Routes>
-            {/* Public Ticket Form */}
+            {/* Public Routes */}
             <Route path="/" element={<SubmitRequest />} />
+            <Route path="/track" element={<TrackTicket />} />
+            <Route path="/track/:ticketNumber" element={<TrackTicket />} />
 
             {/* Admin Authentication */}
             <Route path="/login" element={<Login />} />

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   ShieldCheck,
   Zap,
   CheckCircle,
   Sparkles,
+  Search,
+  ArrowRight,
 } from 'lucide-react';
 import { TicketForm } from '../components/TicketForm/TicketForm';
 import { TicketSuccessModal } from '../components/TicketForm/TicketSuccessModal';
@@ -104,7 +107,34 @@ export const SubmitRequest: React.FC = () => {
       </section>
 
       {/* Form Container */}
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6">
+        {/* Quick Tracking Callout */}
+        <div className="bg-gradient-to-r from-school-50 via-indigo-50/50 to-blue-50/60 border border-school-200/90 rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-3 text-center sm:text-left rtl:sm:text-right">
+            <div className="w-10 h-10 rounded-xl bg-school-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Search className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-extrabold text-slate-900">
+                {t('track.heroTitle')}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">
+                {t('track.heroSubtitle')}
+              </p>
+            </div>
+          </div>
+
+          <Link to="/track" className="shrink-0 w-full sm:w-auto">
+            <button
+              type="button"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-school-50 text-school-700 font-extrabold text-xs border border-school-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer active:scale-95"
+            >
+              <span>{t('track.searchButton')}</span>
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 text-school-600" />
+            </button>
+          </Link>
+        </div>
+
         <TicketForm onSubmit={handleFormSubmit} isLoading={isSubmitting} />
       </main>
 

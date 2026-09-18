@@ -197,9 +197,11 @@ export const getTickets = async (): Promise<Ticket[]> => {
 };
 
 /**
- * Get single ticket by ID
+ * Get single ticket by ID or Ticket Number
  */
 export const getTicketById = async (id: string): Promise<Ticket | null> => {
+  const clean = id.trim().toLowerCase();
+
   if (isFirebaseConfigured && db) {
     try {
       const docRef = doc(db, COLLECTION_NAME, id);
@@ -213,7 +215,41 @@ export const getTicketById = async (id: string): Promise<Ticket | null> => {
   }
 
   const all = await getTickets();
-  return all.find(t => t.id === id || t.ticketNumber === id) || null;
+  return (
+    all.find(
+      t =>
+        t.id.toLowerCase() === clean ||
+        t.ticketNumber?.toLowerCase() === clean ||
+        t.ticketNumber?.toLowerCase().replace(/[^0-9]/g, '') === clean.replace(/[^0-9]/g, '')
+    ) || null
+  );
+};
+
+/**
+ * Real-time subscription to a single ticket by ID or Ticket Number (for public tracking)
+ */
+export const subscribeToTicketByQuery = (
+  queryStr: string,
+  callback: (ticket: Ticket | null) => void
+) => {
+  const clean = queryStr.trim().toLowerCase();
+  const digitsOnly = clean.replace(/[^0-9]/g, '');
+
+  return subscribeToTickets(liveTickets => {
+    const match = liveTickets.find(t => {
+      const tId = t.id?.toLowerCase() || '';
+      const tNum = t.ticketNumber?.toLowerCase() || '';
+      const tDigits = tNum.replace(/[^0-9]/g, '');
+
+      if (tId === clean || tNum === clean) return true;
+      if (digitsOnly && tDigits && (tDigits === digitsOnly || tDigits.endsWith(digitsOnly))) {
+        return true;
+      }
+      return false;
+    });
+
+    callback(match || null);
+  });
 };
 
 /**
