@@ -87,28 +87,19 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 sm:h-[4.25rem] gap-3 sm:gap-4">
           
           {/* SECTION 1: Brand & School Logo */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
-            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-700/80 shadow-xs flex items-center gap-2 sm:gap-2.5 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300 shrink-0">
+          <Link to="/" className="flex items-center group shrink-0" aria-label={t('nav.title')}>
+            <div className="bg-gradient-to-r from-[#061426] via-[#0b2444] to-[#0f3057] px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-2xl border border-slate-700/80 shadow-xs flex items-center gap-2.5 sm:gap-3 group-hover:border-school-400/50 group-hover:shadow-md transition-all duration-300">
               <img
                 src="/logochool.svg"
                 alt="B.TECH"
-                className="h-4 sm:h-4.5 w-auto object-contain"
+                className="h-4.5 sm:h-5 w-auto object-contain"
               />
-              <div className="w-px h-3.5 sm:h-4 bg-white/20" />
+              <div className="w-px h-4 sm:h-4.5 bg-white/20" />
               <img
                 src="/Ministry_of_Education_(Egypt)_logo_(wikiar).png"
                 alt="وزارة التربية والتعليم"
-                className="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain drop-shadow-xs"
+                className="w-5.5 h-5.5 sm:w-6 sm:h-6 object-contain drop-shadow-xs"
               />
-            </div>
-
-            <div className="flex flex-col justify-center min-w-0">
-              <span className="font-black text-xs sm:text-sm lg:text-[15px] tracking-tight text-slate-900 group-hover:text-school-600 transition-colors truncate leading-tight">
-                {t('nav.title')}
-              </span>
-              <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold truncate leading-tight mt-0.5">
-                {t('nav.subtitle')}
-              </span>
             </div>
           </Link>
 
