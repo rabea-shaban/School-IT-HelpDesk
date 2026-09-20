@@ -105,35 +105,36 @@ export const Navbar: React.FC = () => {
 
           {/* SECTION 2: Center Navigation Tabs (Desktop only) */}
           <nav className="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 backdrop-blur-sm shadow-2xs shrink-0">
-            {/* Public Links */}
-            <Link
-              to="/"
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                isActive('/')
-                  ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-              }`}
-            >
-              <Plus className="w-3.5 h-3.5 shrink-0" />
-              <span>{t('nav.submitRequest')}</span>
-            </Link>
-
-            <Link
-              to="/track"
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                isActive('/track')
-                  ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-              }`}
-            >
-              <Search className="w-3.5 h-3.5 shrink-0" />
-              <span>{t('nav.trackTicket')}</span>
-            </Link>
-
-            {isAdmin && (
+            {!isAdmin ? (
               <>
-                <div className="w-px h-3.5 bg-slate-300 mx-0.5" />
+                {/* Public Links (Guest only) */}
+                <Link
+                  to="/"
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <Plus className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.submitRequest')}</span>
+                </Link>
 
+                <Link
+                  to="/track"
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive('/track')
+                      ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                  }`}
+                >
+                  <Search className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('nav.trackTicket')}</span>
+                </Link>
+              </>
+            ) : (
+              <>
+                {/* Admin Links (Logged in) */}
                 <Link
                   to="/dashboard"
                   className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
@@ -373,34 +374,36 @@ export const Navbar: React.FC = () => {
                   </Link>
                 )}
 
-                {/* Quick Actions: New Ticket & Track Ticket */}
-                <div className="space-y-2">
-                  <Link
-                    to="/"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all shadow-xs ${
-                      isActive('/') && location.pathname === '/'
-                        ? 'bg-school-50 text-school-700 border border-school-200/80'
-                        : 'bg-school-600 hover:bg-school-700 text-white shadow-school-600/20'
-                    }`}
-                  >
-                    <Plus className="w-5 h-5" />
-                    <span>{t('nav.submitRequest')}</span>
-                  </Link>
+                {/* Quick Actions: New Ticket & Track Ticket (Guests only) */}
+                {!isAdmin && (
+                  <div className="space-y-2">
+                    <Link
+                      to="/"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all shadow-xs ${
+                        isActive('/') && location.pathname === '/'
+                          ? 'bg-school-50 text-school-700 border border-school-200/80'
+                          : 'bg-school-600 hover:bg-school-700 text-white shadow-school-600/20'
+                      }`}
+                    >
+                      <Plus className="w-5 h-5" />
+                      <span>{t('nav.submitRequest')}</span>
+                    </Link>
 
-                  <Link
-                    to="/track"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all border ${
-                      isActive('/track')
-                        ? 'bg-school-50 text-school-700 border-school-200/80 shadow-xs'
-                        : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
-                    }`}
-                  >
-                    <Search className={`w-5 h-5 ${isActive('/track') ? 'text-school-600' : 'text-slate-400'}`} />
-                    <span>{t('nav.trackTicket')}</span>
-                  </Link>
-                </div>
+                    <Link
+                      to="/track"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all border ${
+                        isActive('/track')
+                          ? 'bg-school-50 text-school-700 border-school-200/80 shadow-xs'
+                          : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
+                      }`}
+                    >
+                      <Search className={`w-5 h-5 ${isActive('/track') ? 'text-school-600' : 'text-slate-400'}`} />
+                      <span>{t('nav.trackTicket')}</span>
+                    </Link>
+                  </div>
+                )}
 
                 {/* Navigation Links */}
                 {isAdmin && (
