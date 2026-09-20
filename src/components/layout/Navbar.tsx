@@ -108,77 +108,77 @@ export const Navbar: React.FC = () => {
             {/* Public Links */}
             <Link
               to="/"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 isActive('/')
                   ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
               }`}
             >
-              <Plus className="w-4 h-4 shrink-0" />
+              <Plus className="w-3.5 h-3.5 shrink-0" />
               <span>{t('nav.submitRequest')}</span>
             </Link>
 
             <Link
               to="/track"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 isActive('/track')
                   ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
               }`}
             >
-              <Search className="w-4 h-4 shrink-0" />
+              <Search className="w-3.5 h-3.5 shrink-0" />
               <span>{t('nav.trackTicket')}</span>
             </Link>
 
             {isAdmin && (
               <>
-                <div className="w-px h-4 bg-slate-300 mx-1" />
+                <div className="w-px h-3.5 bg-slate-300 mx-0.5" />
 
                 <Link
                   to="/dashboard"
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                     isActive('/dashboard')
                       ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 shrink-0" />
+                  <LayoutDashboard className="w-3.5 h-3.5 shrink-0" />
                   <span>{t('nav.dashboard')}</span>
                 </Link>
 
                 <Link
                   to="/tickets"
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                     isActive('/tickets')
                       ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <TicketIcon className="w-4 h-4 shrink-0" />
+                  <TicketIcon className="w-3.5 h-3.5 shrink-0" />
                   <span>{t('nav.tickets')}</span>
                 </Link>
 
                 <Link
                   to="/labs"
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                     isActive('/labs')
                       ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <Layers className="w-4 h-4 shrink-0" />
+                  <Layers className="w-3.5 h-3.5 shrink-0" />
                   <span>{t('nav.labs')}</span>
                 </Link>
 
                 <Link
                   to="/devices"
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                     isActive('/devices')
                       ? 'bg-white text-school-700 shadow-xs border border-slate-200/90'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
-                  <Server className="w-4 h-4 shrink-0" />
+                  <Server className="w-3.5 h-3.5 shrink-0" />
                   <span>{t('nav.devices')}</span>
                 </Link>
               </>
@@ -186,9 +186,9 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* SECTION 3: Action Hub (Desktop) & Mobile Hamburger Button */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Desktop Actions (Hidden on Mobile/Tablet) */}
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
               {/* Language Switcher */}
               <LanguageToggle variant="pill" />
 
@@ -198,20 +198,12 @@ export const Navbar: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2 p-1.5 rounded-2xl hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300 transition-all cursor-pointer group active:scale-95 bg-slate-50/80 shadow-2xs"
+                    className="flex items-center gap-1.5 p-1 rounded-2xl hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300 transition-all cursor-pointer group active:scale-95 bg-slate-50/80 shadow-2xs"
                     aria-expanded={userDropdownOpen}
                     aria-label="User menu"
                   >
-                    <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs sm:text-sm flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-school-600 to-indigo-600 text-white font-black text-xs flex items-center justify-center shadow-xs group-hover:ring-2 group-hover:ring-school-300 transition-all">
                       {userInitials}
-                    </div>
-                    <div className="text-right rtl:text-right ltr:text-left min-w-0 px-1">
-                      <p className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
-                        {user?.displayName || user?.email?.split('@')[0] || t('nav.itAdmin')}
-                      </p>
-                      <p className="text-[10px] text-slate-500 font-medium leading-none">
-                        {t('nav.itAdmin')}
-                      </p>
                     </div>
                     <ChevronDown className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
